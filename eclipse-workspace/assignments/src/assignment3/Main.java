@@ -18,7 +18,7 @@ public static void main(String[] args) {
 		e.printStackTrace();
 	}
 	if(timeTaken>0) {
-		System.out.println("time taken to ping "+timeTaken);
+		System.out.println("time taken to ping "+timeTaken+" milli seconds");
 	}
 	else {
 		System.out.println("Unable to reach the Host");
