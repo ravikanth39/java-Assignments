@@ -5,6 +5,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.io.*;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 public class Assignment1 {
 public static void main(String[] args) {
@@ -14,7 +15,13 @@ public static void main(String[] args) {
 		String givenRegex;
 		System.out.println("Enter the regular expression");
 		givenRegex = scan.next();
-		Pattern givenPattern = Pattern.compile(givenRegex);
+		Pattern givenPattern =null;
+		try{
+			givenPattern = Pattern.compile(givenRegex);
+		} catch (PatternSyntaxException ex){
+			System.out.println("given regular expression is invalid "+ex.getPattern());
+			break;
+		}
 		printMatching(new File("/home/zemoso"),givenPattern);
 		System.out.println("to continue enter 1 or 0 to stop");
 		try{
