@@ -12,13 +12,19 @@ import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 public class Main {
-public static void main(String[] args) throws ParseException {
+public static void main(String[] args){
 	String signUpDate,currDate;
 	Scanner scan = new Scanner(System.in);
 	signUpDate = scan.next();
 	currDate = scan.next();
-	printRange(signUpDate,currDate);
-	scan.close();
+	try{
+		printRange(signUpDate,currDate);
+	} catch (ParseException e){
+		e.printStackTrace();
+	}finally {
+		scan.close();
+	}
+
 	
 }
 
@@ -30,20 +36,20 @@ private static void printRange(String signUpDate, String currDate) throws ParseE
 		System.out.println("No Range");
 		return;
 	}
-	//extracting year from given date
+	//extracting year from given date by converting Date obj to LocalDate obj
 	Instant instant = currentDate.toInstant();
 	ZonedDateTime zdt = instant.atZone(ZoneId.systemDefault());
 	LocalDate testDate = zdt.toLocalDate();
 	int cyear = testDate.getYear();
 	//creating and updating the anniversary Date
-	Calendar aCal = Calendar.getInstance();
-	aCal.setTime(signDate);
-	aCal.set(Calendar.YEAR,cyear);
+	Calendar anniCal = Calendar.getInstance();
+	anniCal.setTime(signDate);
+	anniCal.set(Calendar.YEAR,cyear);
 	//finding the range
-	aCal.add(Calendar.DATE,30);
-	Date preDate = aCal.getTime();
-	aCal.add(Calendar.DATE,-60);
-	Date postDate = aCal.getTime();
+	anniCal.add(Calendar.DATE,30);
+	Date preDate = anniCal.getTime();
+	anniCal.add(Calendar.DATE,-60);
+	Date postDate = anniCal.getTime();
 	if(currentDate.before(preDate)){
 		preDate = currentDate;
 	}
